@@ -16,6 +16,8 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 ### Web Live Preview
 ![Web Editor](./screenshots/web.png)
 
+## Recommended Operating System
+*   **Linux - Debian(Ubuntu etc) / RHEL(Fedora etc)
 
 ## Features
 
@@ -130,13 +132,6 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 *   **Java packages**: Compile with `-d temp_dir` and run with `-cp temp_dir package.MainClass`.
 *   **Persist files**: Replace `/tmp` with a workspace directory and add cleanup policies.
 
-## Credits
-
-*   Django
-*   Django Channels
-*   CodeMirror
-*   Lucide Icons
-
 ## Appendix — key files (ready to paste)
 
 *   **index.html**: Contains `<!DOCTYPE html>`, CDN links for CodeMirror themes and modes, and `DEMO_SNIPPETS` for quick testing.
@@ -152,4 +147,4 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 
 ## Author
 
-*  Armandeep Singh.
+*  **Armandeep Singh.
