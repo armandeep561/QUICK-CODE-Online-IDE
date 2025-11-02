@@ -31,6 +31,7 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 *   **Java memory-safe execution**: Flags to avoid heap errors.
 
 ## Project structure
+
 ├── manage.py # Django entrypoint
 ├── core/settings.py # Django settings (ASGI enabled)
 └── editor/
