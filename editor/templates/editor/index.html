@@ -1,0 +1,199 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QUICK CODE - A Real-Time Online IDE">
+    <meta name="theme-color" content="#181818">
+    <title>QUICK CODE - Online IDE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/material-darker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/base16-light.min.css">
+    <link rel="stylesheet" href="{% static 'editor/css/style.css' %}">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="dark-theme">
+    <div class="app-container">
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="logo-text">QUICK CODE</h1>
+            </div>
+
+            <div class="center-controls">
+                <div class="language-selector">
+                    <select id="language-select">
+                        <option value="python">Python</option>
+                        <option value="c">C</option>
+                        <option value="cpp">C++</option>
+                        <option value="java">Java</option>
+                        <option value="web">Web (HTML/CSS/JS)</option>
+                    </select>
+                </div>
+
+                <button id="run-button">
+                    <i data-lucide="play" class="run-icon"></i>
+                    <span>Run</span>
+                </button>
+            </div>
+
+            <div class="settings">
+                <div class="font-size-control">
+                    <label for="font-size-select">Font Size</label>
+                    <select id="font-size-select">
+                        <option value="13px">13px</option>
+                        <option value="14px" selected>14px</option>
+                        <option value="15px">15px</option>
+                        <option value="16px">16px</option>
+                    </select>
+                </div>
+
+                <button id="theme-toggle" title="Toggle Theme" class="icon-button">
+                    <i data-lucide="sun" class="icon-sun"></i>
+                    <i data-lucide="moon" class="icon-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div id="main-editor-container" class="layout-main-split">
+                <div class="editor-pane" id="main-editor-pane">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span id="filename-display">script.py</span>
+                        </div>
+                        <div class="panel-actions">
+                            <!-- ADD THE NEW COPY BUTTON HERE -->
+                            <button id="open-file-button" class="icon-button" title="Open File">
+                                <i data-lucide="folder-open"></i>
+                            </button>
+                            <button id="copy-code-button" class="icon-button" title="Copy Code">
+                                <i data-lucide="copy"></i>
+                            </button>
+                            <button id="format-code-button" class="icon-button" title="Format Code">
+                                <i data-lucide="align-left"></i>
+                            </button>
+                            <button id="download-button" class="icon-button" title="Download File">
+                                <i data-lucide="download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="code-editor"></textarea>
+                </div>
+
+
+                <div class="output-pane" id="main-output-pane">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span>OUTPUT TERMINAL</span>
+                        </div>
+                        <div class="panel-actions">
+                            <button id="copy-output-button" class="icon-button" title="Copy Output">
+                                <i data-lucide="copy"></i>
+                            </button>
+                            <button id="clear-output-button" class="icon-button" title="Clear Output">
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <pre id="output" tabindex="0"></pre>
+                </div>
+            </div>
+
+            <div id="web-editor-container" class="layout-web-split hidden">
+                <div class="editor-pane" id="web-editor-pane">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span>EDITOR</span>
+                        </div>
+                    </div>
+                    <div class="web-editor-group">
+                        <div class="web-editor-instance">
+                            <div class="sub-panel-header"><span>HTML</span></div>
+                            <textarea id="html-editor"></textarea>
+                        </div>
+                        <div class="web-editor-instance">
+                            <div class="sub-panel-header"><span>CSS</span></div>
+                            <textarea id="css-editor"></textarea>
+                        </div>
+                        <div class="web-editor-instance">
+                            <div class="sub-panel-header"><span>JAVASCRIPT</span></div>
+                            <textarea id="js-editor"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-pane" id="web-preview-pane">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <span>LIVE PREVIEW</span>
+                        </div>
+                        <div class="panel-actions">
+                            <button id="refresh-preview-button" class="icon-button" title="Refresh Preview">
+                                <i data-lucide="refresh-cw"></i>
+                            </button>
+                            <button id="fullscreen-preview-button" class="icon-button" title="Toggle Fullscreen">
+                                <i data-lucide="maximize" class="fullscreen-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <iframe id="preview-iframe" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <input type="file" id="file-input" style="display: none;" />
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js" defer></script>
+
+    <!-- DEMO SNIPPETS -->
+    <script>
+    const DEMO_SNIPPETS = {
+        python: `print("Hello World!")`,
+        
+        c: `#include <stdio.h>
+
+int main()
+{
+    printf("Hello World!");
+    return 0;
+}`,
+        
+        cpp: `#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}`,
+        
+        java: `public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}`
+    };
+
+    window.DEMO_SNIPPETS = DEMO_SNIPPETS;
+    </script>
+
+    <script src="{% static 'editor/js/main.js' %}" defer></script>
+</body>
+
+</html>
