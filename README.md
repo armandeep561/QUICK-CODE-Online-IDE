@@ -86,15 +86,6 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 5.  **Copy and download**: Use the toolbar to copy code/output or download files.
 6.  **Theme and font size**: Toggle the theme and adjust the editor font size from the header.
 
-### Keyboard shortcuts
-
-| Command             | Shortcut         |
-| ------------------- | ---------------- |
-| Run                 | `Ctrl+Enter`     |
-| Save to localStorage| `Ctrl+S`         |
-| Toggle line comments| `Ctrl+/`         |
-| Toggle theme        | `Ctrl+Shift+T`   |
-
 ## Language notes
 
 ### Python
