@@ -17,7 +17,7 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 ![Web Editor](./screenshots/web.png)
 
 ## Recommended Operating System
-*   **Linux - Debian(Ubuntu etc) / RHEL(Fedora etc)
+*   Linux - Debian(Ubuntu etc) / RHEL(Fedora etc)
 
 ## Features
 
@@ -147,4 +147,4 @@ A fast, minimal, real-time browser IDE built with Django + Channels and CodeMirr
 
 ## Author
 
-*  **Armandeep Singh.
+*  Armandeep Singh.
